@@ -13,3 +13,8 @@ struct SignupConstants {
     static let firstNameMinimuLength = 2
     static let firstNameMaximumLength = 10
 }
+
+
+struct RequestPaths {
+    static let signup = "https://photo-app.getsandbox.com/users"
+}
