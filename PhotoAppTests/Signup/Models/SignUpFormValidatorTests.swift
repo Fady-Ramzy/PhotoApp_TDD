@@ -30,7 +30,7 @@ class SignUpFormValidatorTests: XCTestCase {
     // MARK: - Test Methods
     /* First Name unit testing methods */
     
-    func testSignUpFormModelValidator_whenEmptyFirstNameProvided_ShouldReturnFalse() {
+    func test_signUpFormModelValidator_whenEmptyFirstNameProvided_shouldReturnFalse() {
         // Arrange
         /* Sut stands for {System Under Test} */
         
@@ -43,7 +43,7 @@ class SignUpFormValidatorTests: XCTestCase {
     }
     
     
-    func testSignUpFormModelValidator_whenValidFirstNameProvided_ShouldReturnTrue() {
+    func test_signUpFormModelValidator_whenValidFirstNameProvided_shouldReturnTrue() {
         // Arrange
         /* Sut stands for {System Under Test} */
         
@@ -55,7 +55,7 @@ class SignUpFormValidatorTests: XCTestCase {
         XCTAssertTrue(isFirstNameValid, "This function should return TRUE")
     }
     
-    func testSignUpFormModelValidator_whenTooShortFirstNameProvided_ShouldReturnFalse() {
+    func test_signUpFormModelValidator_whenTooShortFirstNameProvided_shouldReturnFalse() {
         // Arrange
         // Act
         
@@ -66,7 +66,7 @@ class SignUpFormValidatorTests: XCTestCase {
         XCTAssertFalse(isFirstNameValid, "This function should return FALSE")
     }
     
-    func testSignUpFormModelValidator_whenTooLongFirstNameProvided_ShouldReturnFalse() {
+    func test_signUpFormModelValidator_whenTooLongFirstNameProvided_shouldReturnFalse() {
         // Arrange
         // Act
         
@@ -77,7 +77,7 @@ class SignUpFormValidatorTests: XCTestCase {
         XCTAssertFalse(isFirstNameValid, "This function should return FALSE when the provided name is too long than the required length")
     }
     
-    func testSignUpFormModelValidator_whenEmptyLastNameProvided_shouldReturnFalse() {
+    func test_SignUpFormModelValidator_whenEmptyLastNameProvided_shouldReturnFalse() {
         // Arrange
         // Act
         
@@ -88,7 +88,7 @@ class SignUpFormValidatorTests: XCTestCase {
         XCTAssertFalse(isLastNameEmpty, "This function should return FALSE when the provided last name is empty")
     }
     
-    func testSignUpFormModelValidator_whenTooShortLastNameIsProvided_shouldReturnFalse() {
+    func test_signUpFormModelValidator_whenTooShortLastNameIsProvided_shouldReturnFalse() {
         // Arrange
         // Act
         
@@ -96,10 +96,10 @@ class SignUpFormValidatorTests: XCTestCase {
         
         // Assert
         
-        XCTAssertFalse(isLastNameToShort, "This function should return FALSE when the provided last name is less than \(SignupConstants.firstNameMinimuLength) characters")
+        XCTAssertFalse(isLastNameToShort, "This function should return FALSE when the provided last name is less than \(SignupConstants.lastNameMinimumLength) characters")
     }
     
-    func testSignUpFormModelValidator_whenTooLongLastNameIsProvided_shouldReturnFalse() {
+    func test_signUpFormModelValidator_whenTooLongLastNameIsProvided_shouldReturnFalse() {
         // Arrange
         //Act
         
@@ -107,10 +107,58 @@ class SignUpFormValidatorTests: XCTestCase {
         
         // Assert
         
-        XCTAssertFalse(isLastNameTooLong, "This function should return FALSE when teh provided last name is greater than \(SignupConstants.firstNameMaximumLength) ")
+        XCTAssertFalse(isLastNameTooLong, "This function should return FALSE when teh provided last name is greater than \(SignupConstants.lastNameMaximumLength) ")
     }
     
-    func testSignUpFormModelValidator_whenRepeatedPasswordPassword_shouldReturnTrue() {
+    func test_signUpFormModelValidator_whenValidLastNameIsProvided_shouldReturnTrue() {
+        // Arrange
+        // Act
+        
+        let isLastNameValid = sut.isLastNameValid(with: "Ramzy")
+        
+        // Assert
+        
+        XCTAssertTrue(isLastNameValid, "This function should return TRUE when the provided last name is valid")
+    }
+    
+    
+    
+    
+    func test_signUpFormValidator_whenEmptyPasswordIsProvided_shouldReturnFalse() {
+        // Arrange
+        // Act
+        
+        let isPasswordEmpty = sut.isPasswordValid(with: "")
+        
+        // Assert
+        
+        XCTAssertFalse(isPasswordEmpty)
+    }
+    
+    func test_signUpFormValidator_whenTooLongPasswordIsProvided_shouldReturnFalse() {
+        // Arrange
+        // Act
+        
+        let isPasswordTooLong = sut.isPasswordValid(with: "12345678903456790909")
+        
+        // Assert
+        
+        XCTAssertFalse(isPasswordTooLong)
+    }
+    
+    func test_signUpFormValidator_whenCorrectPasswordIsProvided_shouldReturnTrue() {
+        // Arrange
+        //Act
+        
+        let isPasswordCorrect = sut.isPasswordValid(with: "12345678")
+        
+        // Assert
+        
+        XCTAssertTrue(isPasswordCorrect)
+    }
+    
+    
+    func test_signUpFormModelValidator_whenRepeatedPasswordPassword_shouldReturnTrue() {
         // Arrange
         // Act
         
@@ -121,7 +169,7 @@ class SignUpFormValidatorTests: XCTestCase {
         XCTAssertTrue(doPasswordMatch, "func doPasswordMatch should return TRUE if the two provided passwords match")
     }
     
-    func testSignUpFormModelValidator_whenPasswordAndRepeatPasswordAreNotEqual_shouldReturnFalse() {
+    func test_signUpFormModelValidator_whenPasswordAndRepeatPasswordAreNotEqual_shouldReturnFalse() {
         // Arrange
         // Act
         
@@ -130,5 +178,49 @@ class SignUpFormValidatorTests: XCTestCase {
         // Assert
         
         XCTAssertFalse(doPasswordsMatch, "func doPasswordMatch() should return FALSE if the two provided passwords do not match")
+    }
+    
+    func test_signUpFormValidator_whenEmailAddressIsNil_shouldReturnFalse() {
+        // Arrange
+        // Act
+        
+        let isEmailAddressValid = sut.isEmailAddressValid(with: nil)
+        
+        // Assert
+        
+        XCTAssertFalse(isEmailAddressValid, "This is function should return False if the email is NIL")
+    }
+    
+    func test_signUpFormValidator_whenEmailAddressIsEmpty_shouldReturnFalse() {
+        // Arrange
+        // Act
+        
+        let isEmailAddressValid = sut.isEmailAddressValid(with: "")
+        
+        // Assert
+        
+        XCTAssertFalse(isEmailAddressValid, "This function should return False if the email is NIL")
+    }
+    
+    func test_signUpFormValidator_whenEmailAddressIsNotValid_shouldReturnFalse() {
+        // Arrange
+        // Act
+        
+        let isEmailAddressValid = sut.isEmailAddressValid(with: "Fady@gmail")
+        
+        // Assert
+        
+        XCTAssertFalse(isEmailAddressValid, "This function should return False if the email is not valid")
+    }
+    
+    func test_signUpFormValidator_whenEmailAddressIsValid_shouldReturnTrue() {
+        // Arrange
+        // Act
+        
+        let isEmailAddressValid = sut.isEmailAddressValid(with: "Fady@gmail.com")
+        
+        // Assert
+        
+        XCTAssertTrue(isEmailAddressValid, "This function should return True if the email is valid")
     }
 }
