@@ -30,197 +30,212 @@ class SignUpFormValidatorTests: XCTestCase {
     // MARK: - Test Methods
     /* First Name unit testing methods */
     
-    func test_signUpFormModelValidator_whenEmptyFirstNameProvided_shouldReturnFalse() {
-        // Arrange
-        /* Sut stands for {System Under Test} */
+    func test_signUpFormModelValidator_whenEmptyFirstNameProvided_shouldThrowError() {
+        // Given
+        // When
+        // Then
+        XCTAssertThrowsError(try sut.isFirstNameValid(with: "")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyFirstName)
+        }
+    }
+    
+    func test_signupFormModelValidator_whenProvidedFirstNameIsNil_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        // Act
-        let isFirstNameValid = sut.isFirstNameValid(with: "")
+        XCTAssertThrowsError(try sut.isFirstNameValid(with: nil)) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyFirstName)
+        }
+    }
+    
+    func test_signUpFormModelValidator_whenTooShortFirstNameProvided_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        // Assert
+        XCTAssertThrowsError(try sut.isFirstNameValid(with: "S")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.firstNameTooShort)
+        }
+    }
+    
+    func test_signUpFormModelValidator_whenTooLongFirstNameProvided_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        XCTAssertFalse(isFirstNameValid, "This function should return TRUE")
+        XCTAssertThrowsError(try sut.isFirstNameValid(with: "FadyFadyFadyFadyFady")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.firstNameTooLong)
+        }
     }
     
     
-    func test_signUpFormModelValidator_whenValidFirstNameProvided_shouldReturnTrue() {
-        // Arrange
-        /* Sut stands for {System Under Test} */
+    func test_signUpFormModelValidator_whenValidFirstNameProvided_shouldNotThrowError() {
+        // Given
+        // When
+        // Then
         
-        // Act
-        let isFirstNameValid = sut.isFirstNameValid(with: "Fady")
-        
-        // Assert
-        
-        XCTAssertTrue(isFirstNameValid, "This function should return TRUE")
+        XCTAssertNoThrow(try sut.isFirstNameValid(with: "Fady"))
     }
     
-    func test_signUpFormModelValidator_whenTooShortFirstNameProvided_shouldReturnFalse() {
-        // Arrange
-        // Act
+    /* First Name unit testing methods */
+    
+    func test_signUpFormModelValidator_whenLastNameProvidedIsNil_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isFirstNameValid = sut.isFirstNameValid(with: "S")
-        
-        // Assert
-        
-        XCTAssertFalse(isFirstNameValid, "This function should return FALSE")
+        XCTAssertThrowsError(try sut.isLastNameValid(with: nil)) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyLastName)
+        }
     }
     
-    func test_signUpFormModelValidator_whenTooLongFirstNameProvided_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormModelValidator_whenProvidedLastNameIsEmpty_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isFirstNameValid = sut.isFirstNameValid(with: "FadyFadyFadyFadyFady")
-        
-        // Assert
-        
-        XCTAssertFalse(isFirstNameValid, "This function should return FALSE when the provided name is too long than the required length")
+        XCTAssertThrowsError(try sut.isLastNameValid(with: "")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyLastName)
+        }
     }
     
-    func test_SignUpFormModelValidator_whenEmptyLastNameProvided_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormModelValidator_whenTooShortLastNameIsProvided_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isLastNameEmpty = sut.isLastNameValid(with: "")
-        
-        // Assert
-        
-        XCTAssertFalse(isLastNameEmpty, "This function should return FALSE when the provided last name is empty")
+        XCTAssertThrowsError(try sut.isLastNameValid(with: "s")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.shortLastName)
+        }
     }
     
-    func test_signUpFormModelValidator_whenTooShortLastNameIsProvided_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormModelValidator_whenTooLongLastNameIsProvided_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isLastNameToShort = sut.isLastNameValid(with: "f")
-        
-        // Assert
-        
-        XCTAssertFalse(isLastNameToShort, "This function should return FALSE when the provided last name is less than \(SignupConstants.lastNameMinimumLength) characters")
+        XCTAssertThrowsError(try sut.isLastNameValid(with: "wqjjwdjknqkjwdjkwqdjkqk")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.longLastName)
+        }
     }
     
-    func test_signUpFormModelValidator_whenTooLongLastNameIsProvided_shouldReturnFalse() {
-        // Arrange
-        //Act
+    func test_signUpFormModelValidator_whenValidLastNameIsProvided_shouldNotThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isLastNameTooLong = sut.isLastNameValid(with: "wqjjwdjknqkjwdjkwqdjkqk")
-        
-        // Assert
-        
-        XCTAssertFalse(isLastNameTooLong, "This function should return FALSE when teh provided last name is greater than \(SignupConstants.lastNameMaximumLength) ")
+        XCTAssertNoThrow(try sut.isLastNameValid(with: "Ramzy"))
     }
     
-    func test_signUpFormModelValidator_whenValidLastNameIsProvided_shouldReturnTrue() {
-        // Arrange
-        // Act
+    /* Password unit testing methods */
+    
+    func test_signUpFormValidator_whenPasswordProvidedIsNil_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isLastNameValid = sut.isLastNameValid(with: "Ramzy")
-        
-        // Assert
-        
-        XCTAssertTrue(isLastNameValid, "This function should return TRUE when the provided last name is valid")
+        XCTAssertThrowsError(try sut.isPasswordValid(with: nil)) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyPassword)
+        }
     }
     
-    
-    
-    
-    func test_signUpFormValidator_whenEmptyPasswordIsProvided_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormValidator_whenEmptyPasswordIsProvided_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isPasswordEmpty = sut.isPasswordValid(with: "")
-        
-        // Assert
-        
-        XCTAssertFalse(isPasswordEmpty)
+        XCTAssertThrowsError(try sut.isPasswordValid(with: "")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyPassword)
+        }
     }
     
-    func test_signUpFormValidator_whenTooLongPasswordIsProvided_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormValidator_whenProvidedPasswordIsToShort_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isPasswordTooLong = sut.isPasswordValid(with: "12345678903456790909")
-        
-        // Assert
-        
-        XCTAssertFalse(isPasswordTooLong)
+        XCTAssertThrowsError(try sut.isPasswordValid(with: "1234")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.shortPassword)
+        }
     }
     
-    func test_signUpFormValidator_whenCorrectPasswordIsProvided_shouldReturnTrue() {
-        // Arrange
-        //Act
+    func test_signUpFormValidator_whenProvidedPasswordIsTooLong_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isPasswordCorrect = sut.isPasswordValid(with: "12345678")
+        XCTAssertThrowsError(try sut.isPasswordValid(with: "12345678903456790909")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.longPassword)
+        }
+    }
+    
+    func test_signUpFormValidator_whenCorrectPasswordIsProvided_shouldNotThrowError() {
+        // Given
+        // When
+        // Then
         
-        // Assert
-        
-        XCTAssertTrue(isPasswordCorrect)
+        XCTAssertNoThrow(try sut.isPasswordValid(with: "12345678"))
     }
     
     
-    func test_signUpFormModelValidator_whenRepeatedPasswordPassword_shouldReturnTrue() {
-        // Arrange
-        // Act
+    /* Repeat Password unit testing methods */
+    
+    func test_signUpFormModelValidator_whenRepeatedPasswordIsCorrect_shouldNotThrowError() {
+        // Given
+        // When
+        // Then
         
-        let doPasswordMatch = sut.doPasswordMatch(with: "123456", repeatPassword: "123456")
-        
-        // Assert
-        
-        XCTAssertTrue(doPasswordMatch, "func doPasswordMatch should return TRUE if the two provided passwords match")
+        XCTAssertNoThrow(try sut.doPasswordMatch(with: "123456", repeatPassword: "123456"))
     }
     
-    func test_signUpFormModelValidator_whenPasswordAndRepeatPasswordAreNotEqual_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormModelValidator_whenPasswordAndRepeatPasswordAreNotEqual_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let doPasswordsMatch = sut.doPasswordMatch(with: "123456", repeatPassword: "123")
-        
-        // Assert
-        
-        XCTAssertFalse(doPasswordsMatch, "func doPasswordMatch() should return FALSE if the two provided passwords do not match")
+        XCTAssertThrowsError(try sut.doPasswordMatch(with: "123456", repeatPassword: "123")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.repeatPasswordDoNotMatch)
+        }
     }
     
-    func test_signUpFormValidator_whenEmailAddressIsNil_shouldReturnFalse() {
-        // Arrange
-        // Act
+    /* Email Address unit testing methods */
+    
+    func test_signUpFormValidator_whenEmailAddressIsNil_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isEmailAddressValid = sut.isEmailAddressValid(with: nil)
-        
-        // Assert
-        
-        XCTAssertFalse(isEmailAddressValid, "This is function should return False if the email is NIL")
+        XCTAssertThrowsError(try sut.isEmailAddressValid(with: nil)) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyEmailAddress)
+        }
     }
     
-    func test_signUpFormValidator_whenEmailAddressIsEmpty_shouldReturnFalse() {
-        // Arrange
-        // Act
+    func test_signUpFormValidator_whenEmailAddressIsEmpty_shouldThrowError() {
+        // Given
+        // When
+        // Then
         
-        let isEmailAddressValid = sut.isEmailAddressValid(with: "")
-        
-        // Assert
-        
-        XCTAssertFalse(isEmailAddressValid, "This function should return False if the email is NIL")
+        XCTAssertThrowsError(try sut.isEmailAddressValid(with: "")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.emptyEmailAddress)
+        }
     }
     
     func test_signUpFormValidator_whenEmailAddressIsNotValid_shouldReturnFalse() {
-        // Arrange
-        // Act
+        // Given
+        // When
+        // Then
         
-        let isEmailAddressValid = sut.isEmailAddressValid(with: "Fady@gmail")
-        
-        // Assert
-        
-        XCTAssertFalse(isEmailAddressValid, "This function should return False if the email is not valid")
+        XCTAssertThrowsError(try sut.isEmailAddressValid(with: "Fady@gmail")) { error in
+            XCTAssertEqual(error as! SignupFormValidationError, SignupFormValidationError.invalidEmailAddress)
+        }
     }
     
     func test_signUpFormValidator_whenEmailAddressIsValid_shouldReturnTrue() {
-        // Arrange
-        // Act
+        // Given
+        // When
+        // Then
         
-        let isEmailAddressValid = sut.isEmailAddressValid(with: "Fady@gmail.com")
-        
-        // Assert
-        
-        XCTAssertTrue(isEmailAddressValid, "This function should return True if the email is valid")
+        XCTAssertNoThrow(try sut.isEmailAddressValid(with: "fady.h.ramzy@gmail.com"))
     }
 }

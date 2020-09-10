@@ -17,6 +17,7 @@ class MockSignupFormValidator: SignupModelValidatorProtocol {
     var isLastNameValidated: Bool = false
     var isEmailValidated: Bool = false
     var isPasswordValidated: Bool = false
+    var isPasswordEqualityValidated: Bool = false
     
     // MARK: - Functions
     
@@ -44,7 +45,9 @@ class MockSignupFormValidator: SignupModelValidatorProtocol {
         return isLastNameValidated
     }
     
-    func doPasswordMatch(with password: String, repeatPassword: String) -> Bool {
-        return true
+    func doPasswordMatch(with password: String?, repeatPassword: String?) -> Bool {
+        isPasswordEqualityValidated = true
+        
+        return isPasswordEqualityValidated
     }
 }

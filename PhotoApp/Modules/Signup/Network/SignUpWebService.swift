@@ -15,7 +15,7 @@ enum HttpMethods: String {
     case delete = "DELETE"
 }
 
-class SignUpWebService {
+class SignUpWebService: SignupWebServiceProtocol {
     
     // MARK: - Properties
     

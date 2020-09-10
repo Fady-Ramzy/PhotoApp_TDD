@@ -8,77 +8,106 @@
 
 import Foundation
 
-protocol SignupModelValidatorProtocol {
-    func isFirstNameValid(with firstName: String?) -> Bool
-    func isLastNameValid(with lastName: String?) -> Bool
-    func isEmailAddressValid(with emailAddress: String?) -> Bool
-    func isPasswordValid(with password: String?) -> Bool
-    func doPasswordMatch(with password: String, repeatPassword: String) -> Bool
+enum SignupFormValidationError: Error {
+    // First Name
+    
+    case emptyFirstName
+    case firstNameTooShort
+    case firstNameTooLong
+    
+    // Last Name
+    case emptyLastName
+    case shortLastName
+    case longLastName
+    
+    // Password
+    case emptyPassword
+    case shortPassword
+    case longPassword
+    
+    // Repeat Password
+    case repeatPasswordDoNotMatch
+    
+    // Email Address
+    case emptyEmailAddress
+    case invalidEmailAddress
 }
-
 
 class SignUpFormValidatorModel: SignupModelValidatorProtocol {
     
-    func isFirstNameValid(with firstName: String?) -> Bool {
+    func isFirstNameValid(with firstName: String?) throws -> Bool {
         /* Empty First Name */
         
         guard let firstNameProvided = firstName, !firstNameProvided.isEmpty else {
-            
-            return false
+            throw SignupFormValidationError.emptyFirstName
         }
         
         /* Less than the minimum length & Greater than the maximum length */
         
-        if firstNameProvided.count < SignupConstants.firstNameMinimumLength || firstNameProvided.count > SignupConstants.firstNameMaximumLength {
-            return false
+        guard !(firstNameProvided.count < SignupConstants.firstNameMinimumLength) else {
+            throw SignupFormValidationError.firstNameTooShort
+        }
+        
+        guard !(firstNameProvided.count > SignupConstants.firstNameMaximumLength) else  {
+            throw SignupFormValidationError.firstNameTooLong
         }
         
         return true
     }
     
-    func isLastNameValid(with lastName: String?) -> Bool {
+    func isLastNameValid(with lastName: String?) throws -> Bool {
         /* Empty Last Name */
         
         guard let lastNameProvided = lastName, !lastNameProvided.isEmpty else {
-            
-            return false
+            throw SignupFormValidationError.emptyLastName
         }
         
         /* Less than the minimum length & Greater than the maximum length */
         
-        if lastNameProvided.count < SignupConstants.lastNameMinimumLength || lastNameProvided.count > SignupConstants.lastNameMaximumLength {
-            
-           return false
+        guard !(lastNameProvided.count < SignupConstants.lastNameMinimumLength) else {
+            throw SignupFormValidationError.shortLastName
+        }
+        
+        guard !(lastNameProvided.count > SignupConstants.lastNameMaximumLength) else {
+            throw SignupFormValidationError.longLastName
         }
         
         return true
     }
     
-    func isEmailAddressValid(with emailAddress: String?) -> Bool {
+    func isEmailAddressValid(with emailAddress: String?) throws -> Bool {
         guard let emailAddressProvided = emailAddress, !emailAddressProvided.isEmpty else {
-            return false
+            throw SignupFormValidationError.emptyEmailAddress
         }
         
         guard emailAddressProvided.isValidEmail() else {
-            return false
+            throw SignupFormValidationError.invalidEmailAddress
         }
         
         return true
     }
     
-    func isPasswordValid(with password: String?) -> Bool {
+    func isPasswordValid(with password: String?) throws -> Bool {
         guard let passwordProvided = password, !passwordProvided.isEmpty else {
-            return false
+            throw SignupFormValidationError.emptyPassword
         }
         
-        guard passwordProvided.count >= 8, passwordProvided.count <= 15 else {
-            return false
+        guard passwordProvided.count >= 8 else {
+            throw SignupFormValidationError.shortPassword
+        }
+        
+        guard passwordProvided.count <= 15 else {
+            throw SignupFormValidationError.longPassword
         }
         
         return true
     }
     
-    func doPasswordMatch(with password: String, repeatPassword: String) -> Bool {
-        return password == repeatPassword
+    func doPasswordMatch(with password: String?, repeatPassword: String?) throws -> Bool {
+        guard  password == repeatPassword else {
+            throw SignupFormValidationError.repeatPasswordDoNotMatch
+        }
+        
+        return true
     }
 }

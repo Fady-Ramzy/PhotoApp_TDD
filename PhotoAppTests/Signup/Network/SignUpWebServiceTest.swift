@@ -58,6 +58,7 @@ class SignUpWebServiceTest: XCTestCase {
     
     func testSignUpWebService_WhenReceivedDifferentJSONResponse_ShouldReturnError() {
         // Arrange
+        
         let jsonString = "{\"path\":\"/users\", \"error\": \"Internal Server Error\"}"
         URLProtocolMock.stubResponseData = jsonString.data(using: .utf8)
         signUpFormModel = SignupFormRequestModel(firstName: "Sergey", lastName: "Kargopolov", email: "test@test.com", password: "12345678")

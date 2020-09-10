@@ -12,8 +12,8 @@ struct SignupFormRequestModel: Encodable {
     
     // MARK: - Properties
     
-    let firstName: String
-    let lastName: String
-    let email: String
-    let password: String
+    let firstName: String?
+    let lastName: String?
+    let email: String?
+    let password: String?
 }
