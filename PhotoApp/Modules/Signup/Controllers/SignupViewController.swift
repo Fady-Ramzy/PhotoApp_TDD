@@ -18,6 +18,7 @@
         @IBOutlet weak var passwordTextField: UITextField!
         @IBOutlet weak var repeatPasswordTextField: UITextField!
         @IBOutlet weak var signupButton: UIButton!
+        @IBOutlet weak var phoneNumberTextField: UITextField!
         
         // MARK: - Properties
         
