@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SignupFormValidationError: Error {
+enum SignupFormValidationError: Error, LocalizedError {
     // First Name
     
     case emptyFirstName
@@ -31,6 +31,35 @@ enum SignupFormValidationError: Error {
     // Email Address
     case emptyEmailAddress
     case invalidEmailAddress
+    
+    var errorDescription: String? {
+        switch self {
+        case .emptyFirstName:
+            return "First name is empty"
+        case .firstNameTooShort:
+            return "First name is too short"
+        case .firstNameTooLong:
+            return "First name is too long"
+        case .emptyLastName:
+            return "Last name is empty"
+        case .shortLastName:
+            return "Last name is too short"
+        case .longLastName:
+            return "Last name is too long"
+        case .emptyPassword:
+            return "Password is empty"
+        case .shortPassword:
+            return "Password is too short"
+        case .longPassword:
+            return "Password is too long"
+        case .repeatPasswordDoNotMatch:
+            return "Repeat password does not match"
+        case .emptyEmailAddress:
+            return "Empty email address"
+        case .invalidEmailAddress:
+            return "Invalid email address"
+        }
+    }
 }
 
 class SignUpFormValidatorModel: SignupModelValidatorProtocol {

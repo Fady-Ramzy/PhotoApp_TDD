@@ -11,13 +11,13 @@ import Foundation
 @testable import PhotoApp
 
 class SignupViewMock: SignupViewProtocol {
-    
+
     // MARK: - Properties
     
     var expectation: XCTestExpectation?
     var errorExpectation: XCTestExpectation?
     var successCallingCounter = 0
-    var signupError: SignupResponseError?
+    var signupError: Error?
     var errorCallingCounter = 0
     
     // MARK: - Functions
@@ -27,7 +27,7 @@ class SignupViewMock: SignupViewProtocol {
         successCallingCounter += 1
     }
     
-    func errorHandler(error: SignupResponseError) {
+    func errorHandler(error: Error) {
         signupError = error
         errorCallingCounter += 1
         errorExpectation?.fulfill()

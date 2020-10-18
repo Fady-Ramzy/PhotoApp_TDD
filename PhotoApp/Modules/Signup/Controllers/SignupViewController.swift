@@ -49,10 +49,25 @@
     
     extension SignupViewController: SignupViewProtocol {
         func successfullSignup() {
+            let alert = UIAlertController(title: "Congratulations", message: "The signup operation has been completed Successfully", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(alertAction)
+            
+            DispatchQueue.main.async {
+                alert.view.accessibilityIdentifier = "successAlertDialog"
+                self.present(alert, animated: true, completion: nil)
+            }
             
         }
         
-        func errorHandler(error: SignupResponseError) {
+        func errorHandler(error: Error) {
+            let alert = UIAlertController(title: "Error Dialog", message: error.localizedDescription, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(alertAction)
             
+            DispatchQueue.main.async {
+                alert.view.accessibilityIdentifier = "errorAlertDialog"
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }

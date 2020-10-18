@@ -10,5 +10,5 @@ import Foundation
 
 protocol SignupViewProtocol: AnyObject {
     func successfullSignup()
-    func errorHandler(error: SignupResponseError)
+    func errorHandler(error: Error)
 }

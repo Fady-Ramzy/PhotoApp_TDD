@@ -17,31 +17,37 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="sLh-ky-hPY">
                                 <rect key="frame" x="24" y="68" width="366" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="firstNameTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" textContentType="given-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-nF-gB4">
                                 <rect key="frame" x="24" y="126" width="366" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="lastNameTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nSy-4u-1ND">
                                 <rect key="frame" x="24" y="184" width="366" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="emailAddressTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p57-0r-7XQ">
                                 <rect key="frame" x="24" y="300" width="366" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="passwordTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8PU-95-V5C">
                                 <rect key="frame" x="24" y="358" width="366" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="repeatPasswordTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LjC-Rh-QT8">
-                                <rect key="frame" x="24" y="788" width="366" height="50"/>
+                                <rect key="frame" x="24" y="416" width="366" height="50"/>
+                                <accessibility key="accessibilityConfiguration" identifier="signupButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qJB-Xf-Wc5"/>
                                 </constraints>
@@ -52,6 +58,7 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vqe-xR-Xg0">
                                 <rect key="frame" x="24" y="242" width="366" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="phoneNumberTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="continue" textContentType="tel"/>
                             </textField>
@@ -65,7 +72,6 @@
                             <constraint firstItem="LjC-Rh-QT8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="LQc-E4-fud"/>
                             <constraint firstItem="8PU-95-V5C" firstAttribute="top" secondItem="p57-0r-7XQ" secondAttribute="bottom" constant="24" id="MRt-lk-E42"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nSy-4u-1ND" secondAttribute="trailing" constant="24" id="T5s-8N-TSo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LjC-Rh-QT8" secondAttribute="bottom" constant="24" id="Tcf-N1-2NJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p57-0r-7XQ" secondAttribute="trailing" constant="24" id="Twy-Ji-ceS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8PU-95-V5C" secondAttribute="trailing" constant="24" id="WJL-mx-jnc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vqe-xR-Xg0" secondAttribute="trailing" constant="24" id="XqC-RV-Rc3"/>
@@ -78,6 +84,7 @@
                             <constraint firstItem="p57-0r-7XQ" firstAttribute="top" secondItem="vqe-xR-Xg0" secondAttribute="bottom" constant="24" id="rmL-qT-DWA"/>
                             <constraint firstItem="vqe-xR-Xg0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="sUS-0S-27Z"/>
                             <constraint firstItem="nSy-4u-1ND" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="uYA-dY-oWz"/>
+                            <constraint firstItem="LjC-Rh-QT8" firstAttribute="top" secondItem="8PU-95-V5C" secondAttribute="bottom" constant="24" id="vBl-KJ-UcT"/>
                             <constraint firstItem="nSy-4u-1ND" firstAttribute="top" secondItem="gYj-nF-gB4" secondAttribute="bottom" constant="24" id="xHL-jW-Ua6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

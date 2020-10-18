@@ -45,32 +45,7 @@ class SignupPresenter: SignupPresenterProtocol {
                 }
             }
         } catch let error as SignupFormValidationError {
-            switch error {
-            case .emptyFirstName:
-                print("First name is empty")
-            case .firstNameTooShort:
-                print("First name is too short")
-            case .firstNameTooLong:
-                print("First name is too long")
-            case .emptyLastName:
-                print("Last name is empty")
-            case .shortLastName:
-                print("Last name is too short")
-            case .longLastName:
-                print("Last name is too long")
-            case .emptyPassword:
-                print("Password is empty")
-            case .shortPassword:
-                print("Password is too short")
-            case .longPassword:
-                print("Password is too long")
-            case .repeatPasswordDoNotMatch:
-                print("Repeat password does not match")
-            case .emptyEmailAddress:
-                print("Empty email address")
-            case .invalidEmailAddress:
-                print("invalid email address")
-            }
+            signupViewProtocol.errorHandler(error: error)
         } catch {
             print(error.localizedDescription)
         }
